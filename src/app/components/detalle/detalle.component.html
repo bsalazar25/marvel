@@ -1,0 +1,46 @@
+<div class="container">
+    <h1>{{ personaje.name | uppercase}}
+        <!-- <small>({{ personaje.aparicion | date:'y' }})</small> -->
+    </h1>
+    <hr>
+
+    <div class="row animated fadeIn fast">
+
+        <div class="col-md-2">
+            <img [src]="personaje.thumbnail.path+'/portrait_uncanny.'+personaje.thumbnail.extension" class="img-fluid"
+                [alt]="personaje.name">
+            <br>
+            <br>
+            <a [routerLink]="['/home']" class="btn btn-outline-danger btn-block">Regresar</a>
+
+
+        </div>
+
+        <div class="col-md-8">
+            <h3>{{personaje.name}} </h3>
+            <hr>
+
+            <p>
+                {{personaje.description}}
+
+            </p>
+            <hr>
+
+            <div class="list-group">
+
+                <button type="button" (click)="openFormModal(item.id)"
+                    class="list-group-item list-group-item-action" *ngFor="let item of comics">{{item.title}}</button>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <!-- <button class="btn btn-lg btn-outline-primary" (click)="openFormModal()">Open Modal</button> -->
+
+</div>
