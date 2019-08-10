@@ -1,68 +1,78 @@
-<div class="card-columns">
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This content is a little bit longer.</p>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="form-row">
+        <div class="col" align="left">
+            <img src="assets/img/logo-marvel.png" width="150" height="50">
         </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="card-footer">   
-            <small class="text-muted">Last updated 3 mins ago</small>
+        <div class="form-group col-7" align="center">
+
+            <input class="form-control" type="search" placeholder="Search character..." aria-label="Search"
+                (input)="onSearchChange($event.target.value)">
         </div>
     </div>
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
+
+</nav>
+
+<div class="main-container">
+
+
+    <div>
+        <form>
+            <div class="form-row">
+                <div class="col">
+                    <img src='assets/icons/characters.png' id="basic-url">
+                    <label for="basic-url">Characters</label>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <select class="form-control">
+                        <option selected>Sort by</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+            </div>
+
+        </form>
+
     </div>
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This card has even longer content than the first to show that equal height action.</p>
+
+
+    <div class="card-columns">
+        <div class="card mb-3"
+            *ngFor="let personaje of personajes  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img class="img-circle"
+                        [src]="personaje.thumbnail.path+'/portrait_xlarge.'+personaje.thumbnail.extension">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{personaje.name}}</h5>
+                        <p class="card-text">{{personaje.description}}</p>
+                        <button type="button" (click)="ver_detalle(personaje.id)" class="btn btn-danger btn-lg">View More</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
         </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
+
+
     </div>
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
+
+    <div class="main-container">
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalSize" [(page)]="page"
+            aria-label="Default pagination"></ngb-pagination>
     </div>
-    <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-        </div>
-    </div>
+
+</div>
+
+<div class="footer-page">
+
+    Todos los derechos Reservados
+
 
 </div>
