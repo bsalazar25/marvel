@@ -28,13 +28,11 @@ export class DetalleComicComponent implements OnInit {
     this.comicServ.getComic(this.id).
       subscribe((data: any) => {
         this.comicData = data.results[0];
-        console.log(this.comicData, 'comic');
         if (this.favorites.length > 0) {
 
           if (this.buscarFavorite(this.id) > -1) {
             this.isInFav = true;
           }
-          console.log(this.isInFav, 'is in');
         }
       });
 
@@ -43,7 +41,6 @@ export class DetalleComicComponent implements OnInit {
   obtenerFavorites() {
     if (localStorage.getItem('favorites')) {
       this.favorites = JSON.parse(localStorage.getItem('favorites'));
-      console.log(this.favorites, 'this.favorites');
     }
   }
 
@@ -51,7 +48,7 @@ export class DetalleComicComponent implements OnInit {
     this.activeModal.close('Modal Closed');
   }
 
-  
+
 
   buscarFavorite(id: number) {
 
@@ -64,7 +61,6 @@ export class DetalleComicComponent implements OnInit {
   addFavorite() {
     if (localStorage.getItem('favorites')) {
       this.favorites = JSON.parse(localStorage.getItem('favorites'));
-      console.log(this.favorites, 'this.favorites');
 
 
       // busco si existe en el array
@@ -82,7 +78,6 @@ export class DetalleComicComponent implements OnInit {
       this.favorites.push(this.comicData);
     }
 
-    console.log(this.favorites, 'this.favorites despues de insertar');
     // guardo en el localStorage
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
 

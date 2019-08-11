@@ -1,11 +1,41 @@
 .img-circle {
-    width:180px;
-    height:180px;
-    border-radius:50%;
-  }
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+
+.card-img-top{
+    width: auto;
+    height: auto;
+}
+
+.side_bar {
+  width: 20%;
+  background-color: blue;
+  height: 100%;
+  position: sticky;
+  top: 0;
+  display: inline-block;
+  
+}
+
+.card-body-fav{
+    flex: 1 1 auto;
+  
+}
+
+.notify-badge{
+    position: absolute;
+    height:0.2rem;
+    top:0rem;
+    right:2.5rem;
+    width:0.2rem;
+    text-align: center;
+    line-height: 1rem;;
+    font-size: 1rem;
+    border-radius: 50%;
+    /* color:white;s */
+    
+}
 
 
-  .card-columns {
-   
-      column-count: 2;
-  }

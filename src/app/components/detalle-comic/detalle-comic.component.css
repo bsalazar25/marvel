@@ -1,0 +1,13 @@
+.close{
+    position: absolute;
+    height:0.2rem;
+    top:0rem;
+    right:2.5rem;
+    width:0.2rem;
+    text-align: center;
+    line-height: 1rem;;
+    font-size: 1rem;
+    border-radius: 50%;
+    /* color:white;s */
+    
+}

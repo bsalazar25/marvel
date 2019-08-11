@@ -1,4 +1,4 @@
-<div class="container">
+<div class="main-container">
     <h1>{{ personaje.name | uppercase}}
         <!-- <small>({{ personaje.aparicion | date:'y' }})</small> -->
     </h1>
@@ -27,9 +27,9 @@
             <hr>
 
             <div class="list-group">
-
-                <button type="button" (click)="openFormModal(item.id)"
-                    class="list-group-item list-group-item-action" *ngFor="let item of comics">{{item.title}}</button>
+                <h4>Lista de Comics </h4>
+                <button type="button" (click)="openFormModal(item.id)" class="list-group-item list-group-item-action"
+                    *ngFor="let item of comics">{{item.title}}</button>
 
             </div>
 

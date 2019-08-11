@@ -1,13 +1,30 @@
-<div class="modal-header">
-        <h4 class="modal-title">{{comicData.title}}</h4>
-        <button type="button" class="close" aria-label="Close"
-         (click)="activeModal.dismiss('Cross click')">
-        </button>
+<div class="card mb-3" style="max-width: 750px;">
+  <button type="button" class="close" (click)="activeModal.dismiss('Cross click')">
+    <img src="/assets/icons/btn-close.png">
+  </button>
+  <div class="row no-gutters main-container">
+
+    <div class="col-md-4">
+      <img [src]="comicData.thumbnail.path+'/portrait_uncanny.'+comicData.thumbnail.extension" class="card-img">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{comicData.title}}</h5>
+        <p class="card-text">{{comicData.description}}</p>
+
       </div>
-      <div class="modal-body">
-        <p>{{comicData.description}}</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline-primary mr-2" (click)="addFavorite()">Add favorite</button>
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss('Close clicked')">Close</button>
-      </div>
+    </div>
+
+
+  </div>
+  <div class="row">
+    <div class="col" >
+      <button class="btn-block btn-outline-primary mr-2" (click)="addFavorite()">Add favorite</button>
+    </div>
+    <div class="col">
+      <button type="button" class="btn-block btn-outline-dark mr-2" >BUY FOR $3.99</button>
+    </div>
+
+
+  </div>
+</div>

@@ -18,7 +18,7 @@ export class PersonajesService {
     const ts = Date.now();
     const md5 = Md5.hashStr(ts + ConfigApi.privateKey + ConfigApi.publicKey);
     const paramsConst = `?apikey=${ConfigApi.publicKey}&ts=${ts}&hash=${md5}`;
- 
+
     let params = '';
     if (parametros.length > 0) {
 
@@ -26,7 +26,6 @@ export class PersonajesService {
         params = params + element.toString();
       });
     }
-    console.log(params);
 
 
     return this.http.get(url + paramsConst + params);
@@ -34,8 +33,11 @@ export class PersonajesService {
   }
 
 
-  getPersonajes(nombre?: string) {
+  getPersonajes(sort: string, nombre?: string) {
+
     let parametros = ['&limit=100'];
+    if (sort === '') { sort = 'name'; }
+    parametros.push(`&orderBy=${sort}`);
     if (nombre.length > 0) {
       parametros.push(`&nameStartsWith=${nombre}`);
     }

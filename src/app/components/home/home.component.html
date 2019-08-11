@@ -1,12 +1,12 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="form-row">
         <div class="col" align="left">
-            <img src="assets/img/logo-marvel.png" width="150" height="50">
+            <img src="/assets/img/logo-marvel.png" width="150" height="50">
         </div>
         <div class="form-group col-7" align="center">
 
-            <input class="form-control" type="search" placeholder="Search character..." aria-label="Search"
-                (input)="onSearchChange($event.target.value)">
+            <input [(ngModel)]="search" class="form-control" type="search" placeholder="Search character..."
+                aria-label="Search" (input)="onSearchChange($event.target.value)">
         </div>
     </div>
 
@@ -15,59 +15,86 @@
 <div class="main-container">
 
 
-    <div>
-        <form>
-            <div class="form-row">
-                <div class="col">
-                    <img src='assets/icons/characters.png' id="basic-url">
-                    <label for="basic-url">Characters</label>
-                </div>
+    <div class="row">
 
-                <div class="form-group col-md-2">
-                    <select class="form-control">
-                        <option selected>Sort by</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                    </select>
-                </div>
-            </div>
+        <div class="col">
+            <div>
+                <!-- <form> -->
+                <div class="form-row">
+                    <div class="col">
+                        <img src='/assets/icons/characters.png' id="basic-url">
+                        <label style="font-size: x-large;" for="basic-url">Characters</label>
+                    </div>
 
-        </form>
+                    <div class="form-group col-md-2">
+                        <select [(ngModel)]="ordernar" class="form-control"
+                            (change)="onChangeSort($event.target.value)">
+                            <option value="">Sort by</option>
+                            <option value="name">name</option>
+                            <option value="modified">modified</option>
 
-    </div>
-
-
-    <div class="card-columns">
-        <div class="card mb-3"
-            *ngFor="let personaje of personajes  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img class="img-circle"
-                        [src]="personaje.thumbnail.path+'/portrait_xlarge.'+personaje.thumbnail.extension">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{personaje.name}}</h5>
-                        <p class="card-text">{{personaje.description}}</p>
-                        <button type="button" (click)="ver_detalle(personaje.id)" class="btn btn-danger btn-lg">View More</button>
+                        </select>
                     </div>
                 </div>
 
+                <!-- </form> -->
+
             </div>
-            <div class="col">
-                <small class="text-muted">Last updated 3 mins ago</small>
+
+
+            <div class="card-columns" style="column-count: 2;">
+                <div class="card mb-3"
+                    *ngFor="let personaje of personajes  | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img class="img-circle"
+                                [src]="personaje.thumbnail.path+'/portrait_xlarge.'+personaje.thumbnail.extension">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{personaje.name}}</h5>
+                                <p class="card-text">{{personaje.description}}</p>
+                                <button type="button" (click)="ver_detalle(personaje.id)"
+                                    class="btn btn-danger btn-lg">View
+                                    More</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
 
-    </div>
 
-    <div class="main-container">
-        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalSize" [(page)]="page"
-            aria-label="Default pagination"></ngb-pagination>
-    </div>
+        <div class="col-2">
 
+            <h4> <img src="/assets/icons/favourites.png" style="width:40px;height:39px;"> <span> My Favorites </span>
+            </h4>
+            <div class="card-columns" style="column-count: 1;">
+                <div class="card" style="max-width: auto; border: none;" *ngFor="let item of favorites">
+                    <img [src]="item.thumbnail.path+'/portrait_xlarge.'+item.thumbnail.extension" class="card-img-top">
+                    <button (click)="eliminar_fav(item)" class="button" role="button"><span class="notify-badge"><img src="/assets/icons/btn-delete.png"
+                            style="width:25px;height:25px;"></span>
+                        </button> 
+                    <div class="card-body-fav">
+                        {{item.title}}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-container">
+    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="totalSize" [(page)]="page"
+        aria-label="Default pagination"></ngb-pagination>
 </div>
 
 <div class="footer-page">

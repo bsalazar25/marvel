@@ -8,33 +8,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  search = '';
+  ordernar = '';
   personajes;
   page = 1;
   pageSize = 10;
   totalSize = 0;
+  favorites: any[] = [];
 
   constructor(private personajeServ: PersonajesService,
-              private _router: Router) {
-    this.personajeServ.getPersonajes('').
+    private _router: Router) {
+    this.personajeServ.getPersonajes(this.ordernar, this.search).
       subscribe((data: any) => {
-        console.log(data, 'response');
         this.page = 1;
         this.personajes = data.results;
         this.totalSize = data.count;
       });
+    this.obtenerFavorites();
+
   }
 
   ngOnInit() {
   }
 
-
+  obtenerFavorites() {
+    if (localStorage.getItem('favorites')) {
+      this.favorites = JSON.parse(localStorage.getItem('favorites'));
+    }
+  }
 
   onSearchChange(searchValue: string): void {
-    console.log(searchValue);
-    this.personajeServ.getPersonajes(searchValue).
+    this.search = searchValue;
+    this.personajeServ.getPersonajes(this.ordernar, searchValue).
       subscribe((data: any) => {
-        console.log(data, 'response');
         this.page = 1;
         this.personajes = data.results;
         this.totalSize = data.count;
@@ -42,10 +48,34 @@ export class HomeComponent implements OnInit {
 
   }
 
+  onChangeSort(value: string) {
+    this.ordernar = value;
+    this.personajeServ.getPersonajes(this.ordernar, this.search).
+      subscribe((data: any) => {
+        this.page = 1;
+        this.personajes = data.results;
+        this.totalSize = data.count;
+      });
+  }
 
   ver_detalle(id: number) {
-    console.log(id);
     this._router.navigate(['/detalle', id]);
+
+  }
+
+  eliminar_fav(item: any) {
+
+    // eliminar de favorito
+    this.favorites.splice(this.buscarFavorite(item.id), 1);
+
+    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  }
+
+
+  buscarFavorite(id: number) {
+
+
+    return this.favorites.findIndex(item => item.id == id);
 
   }
 

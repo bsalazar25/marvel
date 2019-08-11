@@ -28,7 +28,6 @@ export class ComicService {
         params = params + element.toString();
       });
     }
-    console.log(params);
 
 
     return this.http.get(url + paramsConst + params);

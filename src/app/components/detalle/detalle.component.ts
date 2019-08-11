@@ -22,16 +22,10 @@ export class DetalleComponent implements OnInit {
         subscribe((data: any) => {
           this.personaje = data.results[0];
 
-
-
-
-          console.log(this.personaje, 'personaje');
-
         });
       this.personajeServ.getComics(params['id']).
         subscribe((data: any) => {
           this.comics = data.results;
-          console.log(this.comics, 'comics');
         });
     });
 
@@ -41,22 +35,16 @@ export class DetalleComponent implements OnInit {
   }
 
   openFormModal(id: number) {
-    console.log(id);
 
     const modalRef = this.modalService.open(DetalleComicComponent);
     modalRef.componentInstance.id = id; // should be the id
     modalRef.result.then((result) => {
-      console.log(result);
     }).catch((error) => {
       console.log(error);
     });
   }
 
-  verComic(url: string) {
-    console.log(url);
 
-
-  }
 
 
 }
